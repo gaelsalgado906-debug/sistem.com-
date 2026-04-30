@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gael Hub - Premium Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e2e8f0; }
+        .serif-font { font-family: 'Playfair Display', serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .slow-transition { transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* Slider/Scrollbar personalizado para bajar en el panel */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(0, 139, 139, 0.5); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0, 139, 139, 0.8); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden">
+
+    <div id="section-intro" class="slow-transition text-center opacity-0 scale-95 blur-md">
+        <h1 class="serif-font text-7xl md:text-9xl text-white italic mb-8">Gael Hub</h1>
+        <button onclick="changeSection('section-intro', 'section-key')" class="px-12 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-all tracking-[0.3em] text-[10px] uppercase text-white shadow-2xl">
+            Ingresar
+        </button>
+    </div>
+
+    <div id="section-key" class="hidden fixed inset-0 flex items-center justify-center">
+        <div class="glass p-8 rounded-[2.5rem] w-full max-w-md translate-y-10 opacity-0 slow-transition">
+            <div class="text-center mb-8">
+                <h2 class="text-xs font-bold tracking-[0.4em] uppercase text-cyan-500 mb-2">Seguridad</h2>
+                <h3 class="text-2xl font-light text-white">Introduce la Key</h3>
+            </div>
+            <input type="text" id="key-input" placeholder="890" 
+                class="w-full bg-black/50 border border-white/5 rounded-2xl px-4 py-4 text-center text-2xl tracking-[0.3em] text-white focus:outline-none focus:border-cyan-500/50 transition-all mb-4">
+            <button onclick="validateKey()" class="w-full py-4 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-2xl hover:bg-zinc-200 transition-all">Verificar Acceso</button>
+            <button onclick="showKey()" class="w-full mt-4 text-[9px] text-zinc-600 hover:text-white transition-colors uppercase tracking-[0.2em]">Obtener Key (890)</button>
+        </div>
+    </div>
+
+    <div id="section-panel" class="hidden fixed inset-0 flex items-center justify-center p-4">
+        <div class="glass p-8 rounded-[3rem] w-full max-w-2xl translate-y-10 opacity-0 slow-transition shadow-2xl">
+            <div class="flex items-center justify-between mb-6 pb-6 border-b border-white/5">
+                <h2 class="serif-font text-4xl text-white italic">Gael Hub</h2>
+                <span class="text-[9px] text-cyan-500 uppercase tracking-widest font-bold">Panel Premium</span>
+            </div>
+
+            <div class="custom-scroll overflow-y-auto max-h-[420px] pr-3 space-y-4">
+                
+                <button onclick="openScriptBox('premiumV1')" class="group w-full flex items-center justify-between p-7 bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/20 rounded-3xl hover:from-cyan-500/20 transition-all text-left">
+                    <div>
+                        <p class="text-cyan-400 font-bold text-xl uppercase tracking-tighter">Premium Core V1</p>
+                        <p class="text-zinc-500 text-xs">Combate, Movimiento y Tema Dark Cyan</p>
+                    </div>
+                    <div class="text-cyan-500 font-black text-[10px] bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">CORE</div>
+                </button>
+
+                <button onclick="openScriptBox('premiumV2')" class="group w-full flex items-center justify-between p-7 bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 rounded-3xl hover:from-purple-500/20 transition-all text-left">
+                    <div>
+                        <p class="text-purple-400 font-bold text-xl uppercase tracking-tighter">Premium Core V2</p>
+                        <p class="text-zinc-500 text-xs">Visuales, FPS Boost y Rejoin</p>
+                    </div>
+                    <div class="text-purple-500 font-black text-[10px] bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">VIP</div>
+                </button>
+
+                <button onclick="openScriptBox('scriptBase')" class="group w-full flex items-center justify-between p-7 bg-white/[0.02] border border-white/5 rounded-3xl hover:bg-white/[0.05] transition-all text-left">
+                    <div>
+                        <p class="text-white font-bold text-xl uppercase tracking-tighter">Script: Premium Mov</p>
+                        <p class="text-zinc-500 text-xs">Jump Power & Infinite Jump Logic</p>
+                    </div>
+                    <div class="text-zinc-400 font-black text-[10px] bg-white/5 px-3 py-1 rounded-full border border-white/10">BASE</div>
+                </button>
+
+                <div class="py-10 text-center text-zinc-800 text-[8px] tracking-[1em] uppercase italic">Gael Hub Cloud Access</div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-script" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+        <div class="glass rounded-[2.5rem] w-full max-w-2xl overflow-hidden scale-90 opacity-0 transition-all duration-500" id="modal-content">
+            <div class="flex justify-between items-center p-6 border-b border-white/5">
+                <span id="script-title" class="text-[10px] text-cyan-500 uppercase font-bold tracking-widest">Source Code</span>
+                <button onclick="closeScriptBox()" class="text-zinc-500 hover:text-white text-2xl transition-colors">&times;</button>
+            </div>
+            <div class="p-6">
+                <textarea id="lua-code" readonly class="code-font w-full h-80 bg-black/50 text-cyan-400/80 text-[11px] p-5 rounded-2xl border border-white/5 resize-none leading-relaxed custom-scroll"></textarea>
+                <button id="btn-copy" onclick="copyToClipboard()" class="w-full mt-6 py-4 bg-white hover:bg-zinc-200 text-black text-[10px] font-bold uppercase tracking-widest rounded-2xl transition-all">Copiar Script Completo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scripts = {
+            premiumV1: `-- [[ GAEL HUB PREMIUM V1 - CORE ]] --\nrepeat wait() until game:IsLoaded()\n\nlocal Players = game:GetService("Players")\nlocal UserInputService = game:GetService("UserInputService")\nlocal Lighting = game:GetService("Lighting")\n\nlocal WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()\n\nlocal Window = WindUI:CreateWindow({\n    Title = "Gael Hub Premium",\n    Icon = "rbxassetid://10723343321",\n    Author = "By Gael",\n    Folder = "GaelHub_Configs",\n    Theme = {\n        Accent = Color3.fromRGB(0, 139, 139),\n        Background = Color3.fromRGB(10, 10, 10),\n        Text = Color3.fromRGB(255, 255, 255)\n    }\n})\n\nlocal CombatTab = Window:Tab({ Title = "Combate", Icon = "rbxassetid://10723343321" })\nCombatTab:Section({ Title = "Asistencia" })\nCombatTab:Toggle({Title = "Silent Aim", Value = false, Callback = function(state) _G.SilentAim = state end})\n\nlocal MoveTab = Window:Tab({ Title = "Movimiento", Icon = "rbxassetid://10723343321" })\nMoveTab:Slider({Title = "Velocidad", Min = 16, Max = 300, Default = 16, Callback = function(v) if Players.LocalPlayer.Character then Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end end})\nMoveTab:Slider({Title = "Salto", Min = 50, Max = 500, Default = 50, Callback = function(v) if Players.LocalPlayer.Character then Players.LocalPlayer.Character.Humanoid.JumpPower = v end end})\n\nlocal InfJump = false\nMoveTab:Toggle({Title = "Salto Infinito", Callback = function(s) InfJump = s end})\nUserInputService.JumpRequest:Connect(function() if InfJump then Players.LocalPlayer.Character.Humanoid:ChangeState("Jumping") end end)\n\nWindUI:Notify({Title = "Gael Hub", Content = "Premium V1 Cargado", Duration = 5})`,
+            
+            premiumV2: `-- [[ GAEL HUB PREMIUM V2 - UTILITY ]] --\nrepeat wait() until game:IsLoaded()\n\nlocal Lighting = game:GetService("Lighting")\nlocal WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()\n\nlocal Window = WindUI:CreateWindow({\n    Title = "Gael Hub Visuals",\n    Theme = { Accent = Color3.fromRGB(168, 85, 247) }\n})\n\nlocal VisualTab = Window:Tab({ Title = "Visuales" })\nVisualTab:Toggle({\n    Title = "Full Bright",\n    Callback = function(state)\n        Lighting.Ambient = state and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(0, 0, 0)\n        Lighting.Brightness = state and 2 or 1\n    end\n})\n\nlocal ExtraTab = Window:Tab({ Title = "Extra" })\nExtraTab:Button({Title = "FPS Boost", Callback = function() print("Boosting...") end})\nExtraTab:Button({Title = "Rejoin", Callback = function() game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer) end})\n\nWindUI:Notify({Title = "Gael Hub", Content = "Premium V2 Cargado", Duration = 5})`,
+
+            scriptBase: `-- [[ WIND UI LIBRARY - SCRIPT BASE ]] --\n\nlocal WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()\n\nlocal Window = WindUI:CreateWindow({\n    Title = "Premium Hub",\n    Icon = "rbxassetid://10723343321",\n    Author = "By Gemini",\n    Folder = "WindUI_Configs"\n})\n\nlocal MainTab = Window:Tab({ Title = "Inicio", Icon = "rbxassetid://10723343321" })\nMainTab:Button({ Title = "Notificar Estado", Callback = function() WindUI:Notify({ Title = "Sistema", Content = "Script OK", Duration = 3 }) end })\n\nlocal JumpTab = Window:Tab({ Title = "Movimiento", Icon = "rbxassetid://10723343321" })\nJumpTab:Slider({ Title = "Jump Power (Lider)", Min = 50, Max = 500, Default = 50, Callback = function(value) local hum = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") if hum then hum.UseJumpPower = true hum.JumpPower = value end end })\n\nlocal InfiniteJumpEnabled = false\nJumpTab:Toggle({ Title = "Salto Infinito", Callback = function(state) InfiniteJumpEnabled = state end })\n\ngame:GetService("UserInputService").JumpRequest:Connect(function() if InfiniteJumpEnabled then local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") if hum then hum:ChangeState("Jumping") end end end)\n\nWindUI:Notify({ Title = "Bienvenido", Content = "Interfaz Cargada", Duration = 5 })`
+        };
+
+        function changeSection(hideId, showId) {
+            const hideEl = document.getElementById(hideId);
+            const showEl = document.getElementById(showId);
+            hideEl.classList.add('opacity-0', 'scale-90', 'blur-xl');
+            setTimeout(() => {
+                hideEl.classList.add('hidden');
+                showEl.classList.remove('hidden');
+                setTimeout(() => {
+                    showEl.querySelector('div').classList.remove('opacity-0', 'translate-y-10');
+                    showEl.querySelector('div').classList.add('opacity-100', 'translate-y-0');
+                }, 50);
+            }, 800);
+        }
+
+        function validateKey() {
+            if(document.getElementById('key-input').value === "890") changeSection('section-key', 'section-panel');
+            else alert("Key Incorrecta");
+        }
+
+        function showKey() { document.getElementById('key-input').value = "890"; }
+
+        function openScriptBox(type) {
+            document.getElementById('lua-code').value = scripts[type];
+            document.getElementById('modal-script').classList.remove('hidden');
+            document.getElementById('script-title').innerText = type.toUpperCase() + "_CODE.lua";
+            setTimeout(() => {
+                document.getElementById('modal-content').classList.remove('scale-90', 'opacity-0');
+                document.getElementById('modal-content').classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeScriptBox() {
+            document.getElementById('modal-content').classList.add('scale-90', 'opacity-0');
+            setTimeout(() => document.getElementById('modal-script').classList.add('hidden'), 500);
+        }
+
+        function copyToClipboard() {
+            const copyText = document.getElementById("lua-code");
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+            const btn = document.getElementById("btn-copy");
+            btn.innerText = "¡COPIADO CON ÉXITO!";
+            btn.style.backgroundColor = "#008b8b";
+            btn.style.color = "white";
+            setTimeout(() => { btn.innerText = "Copiar Script Completo"; btn.style.backgroundColor = "white"; btn.style.color = "black"; }, 2000);
+        }
+
+        window.onload = () => { 
+            document.getElementById('section-intro').classList.remove('opacity-0', 'scale-95', 'blur-md'); 
+            document.getElementById('section-intro').classList.add('opacity-100', 'scale-100', 'blur-0'); 
+        };
+    </script>
+</body>
+</html>
